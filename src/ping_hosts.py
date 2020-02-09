@@ -1,8 +1,7 @@
 import subprocess
 
 def main():
-  command = ["nmap", "-sn", "-T5", "--min-parallelism", "122" ,"192.168.254.0/24", "-oG", "output.file.txt;" "grep", "-v", "Down", "output.file.txt"]
-  status = subprocess.call(command)
+  os.system("nmap -sn -T5 --min-parallelism 100 192.168.254.0/24 | grep -v \"Down\" | tee /opt/output.file.txt ")
 
 if __name__ == "__main__":
   main()
