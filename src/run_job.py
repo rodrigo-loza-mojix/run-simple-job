@@ -117,6 +117,7 @@ def main():
             _, environment = os.path.split(path_to_environment)
             create_folder(pathfolder=os.path.join(target_path_hubs, environment))
             create_folder(pathfolder=os.path.join(target_path_premises, environment))
+            create_folder(pathfolder=os.path.join(target_path_ips, environment))
             #####################
             ## LOAD YAML FILES ##
             #####################
