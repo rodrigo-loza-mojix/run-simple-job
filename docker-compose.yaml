@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  image: rodrigoloza/run-simple-job:get-mojix-hubs
+  environment:
+    - SCHEMA=https://
+    - DELAY=120
+    - TARGET_PATH_HUBS=/opt/options/hubs/
+    - TARGET_PATH_PREMISES=/opt/options/premises/
+    - CLIENT_INVENTORY_PATH=/opt/axians-hub-deployment-tool/inventories/RED/
+  volumes:
+    - "/opt/options/RED/:/opt/options/"
+    - "/opt/axians-hub-deployment-tool/:/opt/axians-hub-deployment-tool/"
+

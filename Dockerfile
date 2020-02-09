@@ -1,10 +1,10 @@
-FROM alpine:3.9.4
-ENV APP_HOME=/opt/options/
+FROM python:3.7-slim
+ENV APP_HOME=/opt/ \
+    PYTHONUNBUFFERED=1
 WORKDIR ${APP_HOME}
-RUN apk update &&\
-    apk add bash curl jq &&\
-    mkdir -p ${APP_HOME}/premise_codes/
-COPY src/run-job.sh ${APP_HOME}
-ENTRYPOINT ["/bin/bash", "-c"]
-CMD ["/opt/options/run-job.sh"]
+RUN apt-get update &&\
+    apt-get install curl jq -y
+RUN pip3 install requests pyyaml
+COPY src/run-job.py ${APP_HOME}
+ENTRYPOINT ["python", "/opt/run-job.py"]
 
