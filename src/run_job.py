@@ -107,7 +107,7 @@ def create_ip_files(environment=None):
             pathfile = os.path.join(target_path_ips, environment, ip)
             create_file(pathfile=pathfile)
             assert os.path.isfile(pathfile) == True, f"File {pathfile} does not exist."
-    print("ips after creation: ", len(os.listdir(path_to_all_files))
+    print("ips after creation: ", len(os.listdir(path_to_all_files)))
     print("Files created at {}. \n\n".format(get_now()))
 
 def main():
