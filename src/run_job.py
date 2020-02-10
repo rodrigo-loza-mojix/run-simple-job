@@ -38,6 +38,9 @@ def create_folder(pathfolder=None):
 
 def create_inventory(ips=None):
     path_to_hosts_ini = os.path.join(path_to_custom_inventory, "hosts.ini")
+    # Remove file.
+    os.remove(path_to_hosts_ini)
+    # Create file.
     head = "[hosts]\n"
     custom_hubs = [f"hub0{index} ansible_ssh_user=ansible_user ansible_ssh_host={ip}\n" for index, ip in enumerate(ips)]
     file = open(path_to_hosts_ini, "r")
@@ -45,8 +48,15 @@ def create_inventory(ips=None):
     for custom_hub in custom_hubs:
         file.write(custom_hub)
     file.close()
+    # Remove path_to_file_hubs_ids_ips.
+    os.remove(path_to_file_hubs_ids_ips)
 
 def create_files():
+    # Remove files.
+    path_to_all_files = os.path.join(target_path_hubs_ids_ips)
+    files = [os.path.join(target_path_hubs_ids_ips, file) for file in os.listdir(path_to_all_files)]
+    [os.remove(file) for file in files]
+    # Create files.
     file = open(path_to_file_hubs_ids_ips, "r") #HUB-ID___IP
     lines = [line[:-1] for line in file.readlines()]
     file.close()

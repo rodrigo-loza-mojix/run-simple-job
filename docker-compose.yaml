@@ -16,9 +16,9 @@ services:
     volumes:
       # MODE CREATE_INVENTORY.
       - "/opt/others/blacklist.txt:/opt/blacklist.txt"
+      - "/opt/axians-hub-deployment-tool/:/opt/axians-hub-deployment-tool/"
       # MODE CREATE_FILES.
       - "/opt/others/hubs_ids_ips.txt:/opt/hubs_ids_ips.txt"
       # OTHERS.
       - "/opt/options/RED/:/opt/options/" # Create files for red.
-      - "/opt/axians-hub-deployment-tool/:/opt/axians-hub-deployment-tool/" # Both modes.
 
