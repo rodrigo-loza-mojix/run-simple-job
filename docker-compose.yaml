@@ -6,19 +6,19 @@ services:
     container_name: hubs-options-red
     environment:
       # MODE CREATE_INVENTORY.
-      - PATH_TO_BLACKLISTED_IPS_FILE=/opt/blacklist.txt
+      - PATH_TO_BLACKLISTED_IPS_FILE=/others/blacklist.txt
       - PATH_TO_CUSTOM_INVENTORY=/opt/axians-hub-deployment-tool/inventories/CUSTOM/
       # MODE CREATE_FILES.
       - TARGET_PATH_HUBS_IDS_IPS=/opt/options/hubs_ids_ips
-      - PATH_TO_FILE_HUBS_IDS_IPS=/opt/hubs_ids_ips.txt
+      - PATH_TO_FILE_HUBS_IDS_IPS=/others/hubs_ids_ips.txt
       # OTHERS.
       #- MODE=CREATE_INVENTORY
     volumes:
       # MODE CREATE_INVENTORY.
-      - "/opt/others/blacklist.txt:/opt/blacklist.txt"
+      - "/opt/others/:/others/"
       - "/opt/axians-hub-deployment-tool/:/opt/axians-hub-deployment-tool/"
       # MODE CREATE_FILES.
-      - "/opt/others/hubs_ids_ips.txt:/opt/hubs_ids_ips.txt"
+      #- "/opt/others/hubs_ids_ips.txt:/opt/hubs_ids_ips.txt"
       # OTHERS.
       - "/opt/options/RED/:/opt/options/" # Create files for red.
 

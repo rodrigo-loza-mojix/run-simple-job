@@ -5,9 +5,8 @@ import time
 PATH_TO_BLACKLISTED_IPS_FILE = os.environ["PATH_TO_BLACKLISTED_IPS_FILE"]
 
 def load_blacklist():
-  blacklist = []
   file = open(PATH_TO_BLACKLISTED_IPS_FILE, "r")
-  lines = [line for line in file.readlines()]
+  blacklist = [line[:-1] for line in file.readlines()]
   file.close()
   return blacklist
 
@@ -26,6 +25,8 @@ def main():
       if len(match) > 0:
           if not match[0] in blacklist:
               ips.append(match[0])
+  print(blacklist)
+  print(ips)
   return ips
 
 if __name__ == "__main__":
