@@ -141,12 +141,13 @@ def main():
             # Send request.
             response = exec_request(method="GET", url=url, headers=headers, data=data, params=params)
             hub_ids = [obj["id"].replace(" ", "_") for obj in response]
-            print(hub_ids)
-            for hub_id in hub_ids:
-                pathfile=os.path.join(target_path_hubs, environment, hub_id)
-                create_file(pathfile=pathfile)
-                assert os.path.isfile(pathfile) == True, f"File {pathfile} does not exist."
-            print("Hubs after creating: ", len(os.listdir(os.path.join(target_path_hubs, environment))))
+            premise_codes_associated_to_a_hub = [obj["locationCode"] for obj in response] # Get location codes in hubs.
+            #print(hub_ids)
+            #for hub_id in hub_ids:
+            #    pathfile=os.path.join(target_path_hubs, environment, hub_id)
+            #    create_file(pathfile=pathfile)
+            #    assert os.path.isfile(pathfile) == True, f"File {pathfile} does not exist."
+            #print("Hubs after creating: ", len(os.listdir(os.path.join(target_path_hubs, environment))))
             ##########################
             ## CREATE PREMISE FILES ##
             ##########################
@@ -164,20 +165,23 @@ def main():
             params={"level": "premise", "size": "500"}
             # Send request.
             response = exec_request(method="GET", url=url, headers=headers, data=data, params=params)
-            codes = [obj["code"] for obj in response]
-            names = [obj["name"].replace(" ", "_") for obj in response]
-            print(codes)
-            for name, code in zip(names, codes):
-                premise = "___".join([name, code])
-                pathfile = os.path.join(target_path_premises, environment, premise)
-                create_file(pathfile=pathfile)
-                assert os.path.isfile(pathfile) == True, f"File {pathfile} does not exist."
+            premise_codes = [obj["code"] for obj in response]
+            premise_names = [obj["name"].replace(" ", "_") for obj in response]
+            print(premise_codes)
+            for name, code in zip(premise_names, premise_codes):
+                if not code in premise_codes_associated_to_a_hub:
+                    premise = "___".join([name, code])
+                    pathfile = os.path.join(target_path_premises, environment, premise)
+                    create_file(pathfile=pathfile)
+                    assert os.path.isfile(pathfile) == True, f"File {pathfile} does not exist."
+                else:
+                    print("skipping associated premise code: ", code)
             print("premises after creation: ", len(os.listdir(os.path.join(target_path_premises, environment))))
             print("Files created at {}.\n\n".format(get_now()))
             #####################
             ## CREATE IP FILES ##
             #####################
-            create_ip_files(environment=environment)
+            #create_ip_files(environment=environment)
         time.sleep(delay)
 
 if __name__ == "__main__":
