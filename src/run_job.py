@@ -65,6 +65,9 @@ def create_files():
     files = [os.path.join(target_path_hubs_ids_ips, file) for file in os.listdir(path_to_all_files)]
     [os.remove(file) for file in files if os.path.isfile(file)]
     # Create files.
+    ########################
+    ## CREATE HUB_IDS_IPS ##
+    ########################
     file = open(path_to_file_hubs_ids_ips, "r") #HUB-ID___IP
     lines = [line[:-1] for line in file.readlines()]
     file.close()
